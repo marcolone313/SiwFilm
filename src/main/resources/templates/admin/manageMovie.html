@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIWMovie -Gestisci Film</title>
-    <link rel="stylesheet" th:href="@{/css/stile.css}">
-</head>
-
-<body class="background">
-
-    <div th:insert="~{admin/adminindex.html :: header}"> </div>
-
-    <main class="column margin-top" style="margin-top: 2%;">
-
-        <div th:fragment="movie-banner" class="movie-banner">
-
-            <div id="manage-options" class="column"
-                style="justify-content: space-evenly; height: 300px; margin-left: 20px;">
-                <a th:href="@{'/admin/editMovie/'+${movie.id}}">
-                    <img th:src="@{/pngs/edit.png}" style="width: 40px; height: 40px;">
-                </a>
-                <a th:href="@{'/admin/deleteMovie/'+${movie.id}}">
-                    <img th:src="@{/svgs/bin.svg}" style="width: 40px; height: 40px;">
-                </a>
-            </div>
-
-            <div id="movie-image" class="column" style="height:100%; width:40%;">
-                <img th:src="@{'data:image;base64,' + ${movie.imageString}}"
-                    style="height: 300px; width: 220px;margin: 10px 10px 10px 30px;">
-            </div>
-
-            <div id="movie-info" style="height:100%; width:60%;">
-                <div>
-                    <h2 th:text="'Titolo: '+${movie.title}"></h2>
-                </div>
-                <hr>
-                <div>
-                    <h2 th:text="'Anno di Pubblicazione: '+${movie.year}"></h2>
-                </div>
-                <hr>
-                <div th:if="${movie.director}">
-                    <a class="link" th:href="@{'/admin/addDirector' + '/' + ${movie.id}}">
-                        <h2
-                            th:text="'Regista: '+${movie.director.name} + ' ' + ${movie.director.surname} + ' ○ Modifica'">
-                            Regista</h2>
-                    </a>
-                </div>
-                <div th:unless="${movie.director}">
-                    <a class="link" th:href="@{'/admin/addDirector' + '/' + ${movie.id}}">
-                        <h2 th:text="'Ancora nessun Regista ○ Aggiungi'">Regista</h2>
-                    </a>
-                </div>
-                <hr>
-                <div>
-                    <a class="link" th:href="@{'/admin/manageActors/' + ${movie.id}}">
-                        <h2 th:text="'Lista Attori: Modifica'"></h2>
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-        </div>
-
-        <div class="movie-reviews-banner">
-            <h2 style="margin-left: 20px">Recensioni</h2>
-            <div class="review-container">
-                <div class="review-content" th:each="review: ${movie.reviews}">
-                    <h2
-                        th:text="'Titolo: ' + ${review.title} + ' di ' + ${review.user.name} + ' ' + ${review.user.surname}+' ○ Valutazione: '+ ${review.valutation} +'/5'">
-                    </h2>
-                    <progress max="5" th:value="${review.valutation}" class="valutation-bar"></progress>
-                    <a th:href="@{'/admin/manageReview/'+${review.id}}" class="link" style="margin-left: 10%;">
-                        <h2>Leggi Recensione</h2>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-</body>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>SIWMovie - Gestisci Un Film</title>
+	    <!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	</head>
+	
+	<body>
+	
+	    <nav th:insert="~{admin/adminindex.html :: navbar}"> </nav>
+	
+	    <main class="container mt-3">
+		    <div th:fragment="movie-banner" class="row align-items-center">
+		        <div id="manage-options" class="col d-flex flex-column justify-content-around">
+		            <a th:href="@{'/admin/editMovie/'+${movie.id}}" class="btn btn-light">
+		                <img th:src="@{/pngs/edit.png}" class="w-100 h-100">
+		            </a>
+		            <a th:href="@{'/admin/deleteMovie/'+${movie.id}}" class="btn btn-light">
+		                <img th:src="@{/svgs/bin.svg}" class="w-100 h-100">
+		            </a>
+		        </div>
+		
+		        <div id="movie-image" class="col-4">
+		            <img th:src="@{'data:image;base64,' + ${movie.imageString}}" class="img-fluid rounded">
+		        </div>
+		
+		        <div id="movie-info" class="col">
+		            <div class="mb-2">
+		                <h2 th:text="'Titolo: '+${movie.title}"></h2>
+		            </div>
+		            <hr>
+		            <div class="mb-2">
+		                <h2 th:text="'Anno di Pubblicazione: '+${movie.year}"></h2>
+		            </div>
+		            <hr>
+		            <div th:if="${movie.director}" class="mb-2">
+		                <a th:href="@{'/admin/addDirector' + '/' + ${movie.id}}" class="btn btn-link">
+		                    <h2 th:text="'Regista: '+${movie.director.name} + ' ' + ${movie.director.surname} + ' ○ Modifica'"></h2>
+		                </a>
+		            </div>
+		            <div th:unless="${movie.director}" class="mb-2">
+		                <a th:href="@{'/admin/addDirector' + '/' + ${movie.id}}" class="btn btn-link">
+		                    <h2 th:text="'Ancora nessun Regista ○ Aggiungi'"></h2>
+		                </a>
+		            </div>
+		            <hr>
+		            <div class="mb-2">
+		                <a th:href="@{'/admin/manageActors/' + ${movie.id}}" class="btn btn-link">
+		                    <h2 th:text="'Lista Attori: Modifica'"></h2>
+		                </a>
+		            </div>
+		            <hr>
+		        </div>
+		    </div>
+		
+		    <div class="row mt-5">
+		        <h2>Recensioni</h2>
+		        <div class="col-12">
+		            <div class="mb-3" th:each="review: ${movie.reviews}">
+		                <h2 th:text="'Titolo: ' + ${review.title} + ' di ' + ${review.user.name} + ' ' + ${review.user.surname}+' ○ Valutazione: '+ ${review.valutation} +'/5'"></h2>
+		                <progress max="5" th:value="${review.valutation}" class="form-control"></progress>
+		                <a th:href="@{'/admin/manageReview/'+${review.id}}" class="btn btn-link" style="margin-left: 10%;">
+		                    <h2>Leggi Recensione</h2>
+		                </a>
+		            </div>
+		        </div>
+		    </div>
+		</main>
+	
+		<!-- Optional JavaScript -->
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	</body>
 
 </html>
