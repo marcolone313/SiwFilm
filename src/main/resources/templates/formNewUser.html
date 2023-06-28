@@ -5,44 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SiwMovie -Aggiungi un Artista</title>
-    <link rel="stylesheet" th:href="@{/css/stile.css}">
+    <title>SiwMovie - Registrazione</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
 </head>
 
-<body class="background">
+<body>
 
-    <div th:insert="~{index.html :: header}"> </div>
+    <nav th:insert="~{index.html :: navbar}"> </nav>
 
-    <main class="evenly-spacer margin-top">
-        <form method="POST" th:action="@{/formNewUser}" th:object="${user}" class="box">
-            <h2 class="title">Registrazione</h2>
+    <main class="d-flex justify-content-center align-items-center mt-4">
+	    <form method="POST" th:action="@{/formNewUser}" th:object="${user}" class="box">
+	        <h2 class="text-center">Registrazione</h2>
+	
+	        <div class="form-group">
+	            <input type="text" placeholder="Nome" class="form-control mt-2" th:field="${user.name}">
+	            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${user.name}"></span>
+	
+	            <input type="text" placeholder="Cognome" class="form-control mt-2" th:field="${user.surname}">
+	            <span class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="${user.surname}"></span>
+	
+	            <input type="email" placeholder="e-mail" class="form-control mt-2" th:field="${user.email}">
+	            <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="${user.email}"></span>
+	
+	            <input type="text" placeholder="username" class="form-control mt-2" th:field="${user.credentials.username}">
+	            <span class="text-danger" th:if="${#fields.hasErrors('credentials.username')}" th:errors="${user.credentials.username}"></span>
+	
+	            <input type="password" placeholder="password" class="form-control mt-2" th:field="${user.credentials.password}">
+	            <span class="text-danger" th:if="${#fields.hasErrors('credentials.password')}" th:errors="${user.credentials.password}"></span>
+	        </div>
+	        <input type="submit" class="btn btn-primary mt-2">
+	
+	        <div th:if="${#fields.hasGlobalErrors()}">
+	            <h3 class="text-danger" th:each="err:${#fields.globalErrors()}" th:text="${err}">Errore</h3>
+	        </div>
+	    </form>
+	</main>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-            <div class="input-content">
-                <input type="text" placeholder="Nome" class="form-input" th:field="${user.name}">
-                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="${user.name}"></span>
-
-                <input type="text" placeholder="Cognome" class="form-input" th:field="${user.surname}">
-                <span class="error" th:if="${#fields.hasErrors('surname')}" th:errors="${user.surname}"></span>
-
-                <input type="email" placeholder="e-mail" class="form-input" th:field="${user.email}">
-                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="${user.email}"></span>
-
-                <input type="text" placeholder="username" class="form-input" th:field="${user.credentials.username}">
-                <span class="error" th:if="${#fields.hasErrors('credentials.username')}"
-                    th:errors="${user.credentials.username}"></span>
-
-                <input type="password" placeholder="password" class="form-input"
-                    th:field="${user.credentials.password}">
-                <span class="error" th:if="${#fields.hasErrors('credentials.password')}"
-                    th:errors="${user.credentials.password}"></span>
-            </div>
-            <input type="submit" class="submit">
-
-            <div th:if="${#fields.hasGlobalErrors()}">
-                <h3 class="error" th:each="err:${#fields.globalErrors()}" th:text="${err}">Errore</h3>
-            </div>
-        </form>
-    </main>
 
 </body>
 
