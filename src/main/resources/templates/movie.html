@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIWMovie -Film</title>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div th:insert="~{index.html :: navbar}"> </div>
+
+    <main class="container mt-4">
+
+    <div th:fragment="movie-banner" class="row align-items-center">
+        <div id="movie-image" class="col-lg-5">
+            <img th:src="@{'data:image;base64,' + ${movie.imageString}}" class="img-fluid rounded mx-auto d-block">
+        </div>
+        <div id="movie-info" class="col-lg-7">
+            <h2 th:text="'Titolo: '+${movie.title}"></h2>
+            <hr>
+            <h2 th:text="'Anno di Pubblicazione: '+${movie.year}"></h2>
+            <hr>
+            <div th:if="${movie.director}">
+                <a class="text-decoration-none" th:href="@{'/artists' + '/' + ${movie.director.id}}">
+                    <h2 th:text="'Regista: '+${movie.director.name} + ' ' + ${movie.director.surname}"></h2>
+                </a>
+            </div>
+            <div th:unless="${movie.director}">
+                <h2 th:text="'Ancora nessun Regista'"></h2>
+            </div>
+            <hr>
+            <a class="text-decoration-none" th:href="@{'/artistsForMovie' + '/' + ${movie.id}}">
+                <h2 th:text="'Lista Attori: Visualizza'"></h2>
+            </a>
+            <hr>
+        </div>
+    </div>
+
+    <div class="movie-reviews-banner">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Recensioni</h2>
+            <h2 th:if="${rating} != null" th:text="'Valutazione Media: '+${rating}+'/5'"></h2>
+            <progress th:if="${rating} != null" class="progress-bar" th:value="${rating}" max="5"></progress>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary" th:href="@{'/user/reviewFilm/' + ${movie.id}}">Aggiungi una Recensione</a>
+        </div>
+        <div class="review-container mt-4">
+            <div class="review-content" th:each="review: ${movie.reviews}">
+                <h2 th:text="'Titolo: ' + ${review.title} + ' di ' + ${review.user.name} + ' ' + ${review.user.surname}+' ○ Valutazione: '+ ${review.valutation} +'/5'"></h2>
+                <progress max="5" th:value="${review.valutation}" class="progress-bar"></progress>
+                <a th:href="@{'/review/'+${review.id}}" class="text-decoration-none"><h2>Leggi Recensione</h2></a>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

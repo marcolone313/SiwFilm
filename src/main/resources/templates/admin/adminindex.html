@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIWMovie</title>
+    <link rel="stylesheet" th:href="@{/css/stile.css}">
+</head>
+
+<body class="background">
+
+    <header th:fragment="header">
+        <a th:href="@{/index}" class="title">SIW Movie</a>
+        <nav>
+            <div class="dropdown">
+                <p>Film</p>
+                <div class="dropdown-content">
+                    <a th:href="@{/admin/formNewMovie}">Nuovo Film</a>
+                    <a th:href="@{/movies}">Tutti i Film</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <p>Artisti</p>
+                <div class="dropdown-content">
+                    <a th:href="@{/admin/formNewArtist}">Nuovo Artista</a>
+                    <a th:href="@{/artists}">Tutti gli Artisti</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <p>Gestione</p>
+                <div class="dropdown-content">
+                    <a th:href="@{/admin/manageMovies}">Gestisci Film</a>
+                    <a th:href="@{/admin/manageArtists}">Gestisci Artisti</a>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; margin-left: 100px;">
+                <img th:src="@{/pngs/user.png}" style="max-width: 48px; max-height: 48px;">
+
+                <div class="dropdown">
+                    <p sec:authentication="name">nomeUtente:</p>
+                    <div class="dropdown-content">
+                        <a th:href="@{/login}">Login</a>
+                        <a th:href="@{/logout}">LogOut</a>
+                        <a th:href="@{/formNewUser}">Nuovo Utente</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="evenly-spacer margin-top">
+        <!--<div class="box">
+            <h2 class="title">Benvenuto!</h2>
+            <h3 class="description">In SIWMovie potrai visualizzare e gestire una raccolta di film e Artisti, e scoprire
+                le ultime news dal mondo del cinema!</h3>
+        </div>-->
+
+
+    </main>
+</body>
+
+</html>
