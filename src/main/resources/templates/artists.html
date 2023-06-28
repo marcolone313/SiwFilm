@@ -5,34 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIWMovie -Tutti gli Artisti</title>
-    <link rel="stylesheet" th:href="@{/css/stile.css}">
+    <title>SIWMovie - Tutti gli Artisti</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
 </head>
 
-<body class="background">
+<body>
 
-    <div th:insert="~{index.html :: header}"> </div>
+    <nav th:insert="~{index.html :: navbar}"> </nav>
 
-    <main>
-        <div class="card-slideshow mini-margin-top">
-            <div class="title-div">
-                <h1 th:if="${artists.isEmpty()}" class="title">Non ci sono Artisti nel sistema</h1>
-                <h1 th:unless="${artists.isEmpty()}" class="title">Tutti gli Artisti</h1>
-            </div>
-            <div class="card-container small-margin-top">
-                <div class="card" th:each="artist : ${artists}">
-                    <div class="card-img">
-                        <img th:src="@{'data:image;base64,' + ${artist.imageString}}">
-                    </div>
-                    <div class="card-info">
-                        <a th:href="@{'/artists' + '/' + ${artist.id}}" class="link">
-                            <h3 th:text="${artist.name} + ' ' + ${artist.surname}">Info</h3>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+    <main class="mt-3">
+	    <div class="container">
+	        <div class="text-center">
+	            <h1 th:if="${artists.isEmpty()}">Non ci sono Artisti nel sistema</h1>
+	            <h1 th:unless="${artists.isEmpty()}">Tutti gli Artisti</h1>
+	        </div>
+	        <div class="row mt-3">
+	            <div class="col-sm-4" th:each="artist : ${artists}">
+	                <div class="card">
+	                    <img class="card-img-top" th:src="@{'data:image;base64,' + ${artist.imageString}}" alt="Card image">
+	                    <div class="card-body" style="text-align: center;">
+	                        <a th:href="@{'/artists' + '/' + ${artist.id}}" class="btn btn-primary">
+	                            <h3 class="card-title" th:text="${artist.name} + ' ' + ${artist.surname}">Info</h3>
+	                        </a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</main>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </body>
 
