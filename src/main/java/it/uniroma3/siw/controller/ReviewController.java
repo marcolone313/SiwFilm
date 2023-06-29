@@ -52,6 +52,8 @@ public class ReviewController {
 
 			try {
 				model.addAttribute("movie", this.reviewService.createReviewForMovie(id, newReview, bindingResult));
+				model.addAttribute("rating", this.reviewService.getMovieRatingById(id));
+				model.addAttribute("reviews", this.reviewService.getListReviewByMovie(this.movieService.getMovieById(id)));
 				return "movie.html";
 			} catch (IOException e) {
 				model.addAttribute("movie", this.movieService.getMovieById(id));
