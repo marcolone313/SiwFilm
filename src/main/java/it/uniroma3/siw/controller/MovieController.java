@@ -108,6 +108,7 @@ public class MovieController {
 	public String getMovie(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("movie", this.movieService.getMovieById(id));
 		model.addAttribute("rating", this.reviewService.getMovieRatingById(id));
+		model.addAttribute("reviews", this.reviewService.getListReviewByMovie(this.movieService.getMovieById(id)));
 		return "movie.html";
 	}
 
