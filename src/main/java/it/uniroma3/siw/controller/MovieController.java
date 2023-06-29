@@ -44,6 +44,7 @@ public class MovieController {
 	@GetMapping("/admin/manageMovies/{id}")
 	public String updateMovie(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("movie", this.movieService.getMovieById(id));
+		model.addAttribute("reviews", this.reviewService.getListReviewByMovie(this.movieService.getMovieById(id)));
 		return "/admin/manageMovie.html";
 	}
 

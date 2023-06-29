@@ -21,13 +21,13 @@
 	            <h1 th:if="${artists.isEmpty()}">Non ci sono Artisti nel sistema</h1>
 	            <h1 th:unless="${artists.isEmpty()}">Tutti gli Artisti</h1>
 	        </div>
-	        <div class="row mt-3">
-	            <div class="col-sm-4" th:each="artist : ${artists}">
-	                <div class="card">
-	                    <img class="card-img-top" th:src="@{'data:image;base64,' + ${artist.imageString}}" alt="Card image">
-	                    <div class="card-body" style="text-align: center;">
+	        <div class="row">
+	            <div class="col-md-4 my-2" th:each="artist : ${artists}">
+	                <div class="card h-100 d-flex align-items-center">
+	                    <img class="card-img-top" style = "max-width: 200px; max-height: 300px; padding-top: 20px;" th:src="@{'data:image;base64,' + ${artist.imageString}}" alt="Card image">
+	                    <div class="card-body d-flex align-items-end">
 	                        <a th:href="@{'/artists' + '/' + ${artist.id}}" class="btn btn-primary">
-	                            <h3 class="card-title" th:text="${artist.name} + ' ' + ${artist.surname}">Info</h3>
+	                            <h5 class="card-title text-center" th:text="${artist.name} + ' ' + ${artist.surname}">Info</h5>
 	                        </a>
 	                    </div>
 	                </div>

@@ -12,41 +12,40 @@
 
 <body>
 
-    <nav th:insert="~{index.html :: navbar}"> </nav>
+    <nav th:insert="~{navbar.html :: navbar-admin}"> </nav>
+	
+	<main class="container mt-5">
+        <div class="d-flex justify-content-center">
+            <h1 class="display-4" th:if="${movies.isEmpty()}">Non ci sono Film nel sistema</h1>
+            <h1 class="display-4" th:unless="${movies.isEmpty()}">Tutti i Film</h1>
+        </div>
 
-    <main>
-	    <div class="title-div">
-	        <h1 class="title" th:if="${movies.isEmpty()}">Non ci sono Film nel sistema</h1>
-	        <h1 class="title" th:unless="${movies.isEmpty()}">Gestisci i Film</h1>
+        <div class="d-flex justify-content-center my-3">
+            <form method="GET" th:action="@{/manageMoviesByYear}" class="d-flex justify-content-center">
+                <h3 class="mr-3">Filtra per anno:</h3>
+                <div class="form-group">
+                    <input type="number" placeholder="Anno del Film" class="form-control" th:name="year">
+                </div>
+                <button type="submit" class="btn btn-primary ml-3" style="max-width: 40px; max-height: 40px;">
+                    <img style="max-width: 30px; max-height: 30px; padding-right: 15px;" th:src="@{/svgs/search.svg}">
+                </button>
+            </form>
+        </div>
+
+	<div class="row">
+	  <div th:each="movie:${movies}" class="col-md-4 my-2">
+	    <div class="card h-100 d-flex align-items-center">
+	      <img class="card-img-top" style="max-width: 200px; max-height: 300px; padding-top: 20px;" th:src="@{'data:image;base64,' + ${movie.imageString}}" alt="Image of the movie">
+	      <div class="card-body d-flex align-items-end">
+	        <a th:href="@{'/admin/manageMovies' + '/' + ${movie.id} }">
+	          <h5 class="card-title text-center" th:text="${movie.title} + ' ' + '(' + ${movie.year} + ')'"></h5>
+	        </a>
+	      </div>
 	    </div>
-	
-	    <div class="d-flex justify-content-center">
-	        <form method="GET" th:action="@{/manageMoviesByYear}" class="d-flex align-items-center">
-	            <h3>Filtra per anno</h3>
-	            <div class="input-content">
-	                <input type="number" placeholder="Anno del Film" class="form-control" name="year" style="height: 30px;">
-	            </div>
-	            <button type="submit" class="btn btn-primary">
-	                <img th:src="@{/svgs/search.svg}" class="icon-button">
-	            </button>
-	        </form>
-	    </div>
-	
-	    <div class="card-slideshow mini-margin-top">
-	        <div class="card-container small-margin-top">
-	            <div class="card" th:each="movie:${movies}">
-	                <div class="card-img">
-	                    <img th:src="@{'data:image;base64,' + ${movie.imageString}}" class="card-img-top">
-	                </div>
-	                <div class="card-info">
-	                    <a th:href="@{'/admin/manageMovies' + '/' + ${movie.id}}" class="link">
-	                        <h3 th:text="${movie.title} + ' (' + ${movie.year} + ')'"> Info </h3>
-	                    </a>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</main>
+	  </div>
+	</div>
+
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -12,7 +12,7 @@
 
 <body>
 
-    <nav th:insert="~{admin/adminindex.html :: navbar}"> </nav>
+    <nav th:insert="~{navbar.html :: navbar-admin}"> </nav>
 
     <main class="evenly-spaced margin-top">
 	    <form method="POST" th:action="@{/admin/editMovie/{id}(id=${movie.id})}" th:object="${movie}" class="box" enctype="multipart/form-data">

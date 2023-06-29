@@ -12,16 +12,17 @@
 	
 	<body>
 	
-	    <nav th:insert="~{admin/adminindex.html :: navbar}"> </nav>
+	    <nav th:insert="~{navbar.html :: navbar-admin}"> </nav>
 	
-	    <main class="container mt-3">
+		
+	    <main class="container mt-4">
 		    <div th:fragment="movie-banner" class="row align-items-center">
-		        <div id="manage-options" class="col d-flex flex-column justify-content-around">
-		            <a th:href="@{'/admin/editMovie/'+${movie.id}}" class="btn btn-light">
-		                <img th:src="@{/pngs/edit.png}" class="w-100 h-100">
+		        <div id="manage-options" class="col d-flex flex-column justify-content-center">
+		            <a th:href="@{'/admin/editMovie/'+${movie.id}}" class="btn btn-light mb-3" style="height: 50px; width: 70px;">
+		                <img th:src="@{/pngs/edit.png}" style="max-width: 40px; max-height: 40px;">
 		            </a>
-		            <a th:href="@{'/admin/deleteMovie/'+${movie.id}}" class="btn btn-light">
-		                <img th:src="@{/svgs/bin.svg}" class="w-100 h-100">
+		            <a th:href="@{'/admin/deleteMovie/'+${movie.id}}" class="btn btn-light" style="height: 50px; width: 70px;">
+		                <img th:src="@{/svgs/bin.svg}" style="max-width: 40px; max-height: 40px;">
 		            </a>
 		        </div>
 		

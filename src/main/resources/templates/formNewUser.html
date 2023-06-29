@@ -13,7 +13,7 @@
 
 <body>
 
-    <nav th:insert="~{index.html :: navbar}"> </nav>
+    <nav th:insert="~{navbar.html :: navbar}"> </nav>
 
     <main class="d-flex justify-content-center align-items-center mt-4">
 	    <form method="POST" th:action="@{/formNewUser}" th:object="${user}" class="box">
