@@ -13,14 +13,13 @@
 
 <body>
 
-    <nav th:insert="~{index.html :: navbar}"> </nav>
+    <nav th:insert="~{navbar.html :: navbar}"> </nav>
 
     <main class="container mt-3">
-	    <div th:insert="~{movie.html :: movie-banner}" class="d-flex w-100"></div>
 	
 	    <form method="POST" th:action="@{/user/editReview/{id}(id=${review.id})}" th:object="${review}">
 	
-	        <div class="d-flex mt-2" id="title-and-valutation">
+	        <div class="d-flex mt-2" id="title-and-valutation" style="justify-content: center;">
 	
 	            <div class="d-flex flex-column ml-2">
 	                <div class="d-flex align-items-center">
@@ -34,27 +33,30 @@
 	            <div class="d-flex flex-column ml-4">
 	                <div class="d-flex align-items-center">
 	                    <h2 th:text="'Numero di Stelle: '">Numero Di Stelle:</h2>
+	                    <span>&ensp;</span>
 	                    <input type="radio" name="valutation" value="1" th:checked="${review.valutation == 1}">
-	                    <h2>1</h2>
+	                    <h2>&nbsp; 1 &nbsp;</h2>
 	                    <input type="radio" name="valutation" value="2" th:checked="${review.valutation == 2}">
-	                    <h2>2</h2>
+	                    <h2>&nbsp; 2 &nbsp;</h2>
 	                    <input type="radio" name="valutation" value="3" th:checked="${review.valutation == 3}">
-	                    <h2>3</h2>
+	                    <h2>&nbsp; 3 &nbsp;</h2>
 	                    <input type="radio" name="valutation" value="4" th:checked="${review.valutation == 4}">
-	                    <h2>4</h2>
+	                    <h2>&nbsp; 4 &nbsp;</h2>
 	                    <input type="radio" name="valutation" value="5" th:checked="${review.valutation == 5}">
-	                    <h2>5</h2>
+	                    <h2>&nbsp; 5 &nbsp;</h2>
 	                </div>
 	                <span class="text-danger" th:if="${#fields.hasErrors('valutation')}" th:errors="*{valutation}"></span>
 	            </div>
 	
 	        </div>
 	
-	        <div class="d-flex align-items-center ml-2 mt-2">
+	        <div class="d-flex align-items-center ml-2 mt-2" style="flex-direction: column;">
 	            <div class="d-flex flex-column" style="width: 70%">
 	                <textarea type="text" class="form-control" th:field="${review.content}"></textarea>
 	                <span class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
 	            </div>
+	            
+	            <div><br></div>
 	
 	            <div class="d-flex flex-column ml-2">
 	                <input type="submit" class="btn btn-primary">
