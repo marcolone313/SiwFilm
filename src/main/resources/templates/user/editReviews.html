@@ -8,22 +8,52 @@
     <title>SIWMovie - Il mio Profilo</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/stile.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<style>
+    	.checked {
+     	 color: orange;
+    	}
+  	</style>
 
 </head>
 
 <body>
 
-    <nav th:insert="~{index.html :: navbar}"> </nav>
+    <nav th:insert="~{navbar.html :: navbar}"> </nav>
 
     <main class="container mt-3">
-	    <div class="row align-items-center" style="height: 500px;">
-	        <h2 class="ml-2" th:text="'Nome Utente: ' + ${user.name} + ' ' + ${user.surname} + ' ○ Le mie Recensioni:'">Recensioni</h2>
+	    <div class="column align-items-center" style="height: 500px;">
+	        <h2 class="ml-2" th:utext="'Nome Utente: ' + ${user.name} + ' ' + ${user.surname} + '<br/>' +  ' Le mie Recensioni:'">Recensioni</h2>
 	        <div class="d-flex justify-content-end">
 	        </div>
 	        <div class="review-container overflow-auto" style="height: 400px;">
-	            <div class="mb-3" th:each="review: ${user.review}">
-	                <h2 th:text="'Titolo: ' + ${review.title} +' ○ Valutazione: '+ ${review.valutation} +'/5'"></h2>
-	                <progress max="5" th:value="${review.valutation}" class="progress"></progress>
+	            <div th:each="review: ${user.review}" id="container-recensione" class="review-container mt-4 rounded shadow" style="text-align: center;">
+	                <h3 th:text="'Titolo: ' + ${review.title} + '&ensp;' + '&nbsp;' + '|' + '&ensp;' + ' Valutazione: '+ ${review.valutation} +'/5' + '&ensp;'"></h3>
+	                <!--<progress max="5" th:value="${review.valutation}" class="progress"></progress>-->
+	                
+					<style>
+    					.stars-container {
+        				display: inline-block;
+    				}
+
+    				.stars-container p {
+        				display: inline-block;
+    				}
+    				
+        			
+					</style>
+
+					<div th:with="valutation=${review.valutation}">
+					    <div class="stars-container">
+					        <p th:each="review: ${#numbers.sequence(0, 5)}">
+					            <span th:if="${review > valutation}" class="fa fa-star"></span>
+					            <span th:if="${review < valutation}" class="fa fa-star checked"></span>
+					        </p>
+					    </div>
+					</div>
+
+	                
 	                <a th:href="@{'/user/editReview/'+${review.id}}" class="btn btn-link ml-2"><h2>Modifica Recensione</h2></a>
 	            </div>
 	        </div>
