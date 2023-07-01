@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
@@ -27,12 +26,9 @@ public class AuthenticationController {
     private UserService userService;
     @Autowired
     private UserValidator userValidator;
-//    @Autowired
-//    private GenreService genreService;
 
     @GetMapping("/")
     public String indexPage(Model model){
-        //model.addAttribute("genres", this.genreService.getAllGenres());
         return "index.html";
     }
 
@@ -58,7 +54,6 @@ public class AuthenticationController {
             user.getCredentials().setUser(user);
             userService.saveUser(user);
 
-            //model.addAttribute("genres", this.genreService.getAllGenres());
             return "index.html";
         }
         return "formNewUser.html";
@@ -67,8 +62,6 @@ public class AuthenticationController {
     @GetMapping(value = "/index")
     public String index(Model model) {
         org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //model.addAttribute("genres", this.genreService.getAllGenres());
-        //model.addAttribute("topMovies", this.reviewRepository.findTopRatedMovies());
 
         if (authentication instanceof AnonymousAuthenticationToken) {
             return "index.html";
@@ -90,11 +83,8 @@ public class AuthenticationController {
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
         if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             // carica la pagina admin
-            //model.addAttribute("genres", this.genreService.getAllGenres());
             return "admin/adminindex.html";
         } else if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
-            // carica la pagina utente autenticato
-            //model.addAttribute("genres", this.genreService.getAllGenres());
             return "index.html";
         }
         return "login.html";

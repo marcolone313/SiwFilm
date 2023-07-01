@@ -58,7 +58,8 @@ public class ReviewService {
 
     @Transactional
     public Float getMovieRatingById(Long id){
-        return this.reviewRepository.findValutationAvgByMovie(this.movieRepository.findById(id).get());
+        return (Math.round(this.reviewRepository.findValutationAvgByMovie(this.movieRepository.findById(id).get()) * Math.pow(10, 1)) / (float) Math.pow(10, 1));
+        
     }
 
     @Transactional
@@ -124,4 +125,12 @@ public class ReviewService {
 			throw new IOException();
 		}
 	}
+    
+    public static float roundToHalf(float number) {
+        float rounded = Math.round(number); // Arrotonda verso l'intero più vicino
+        if (Math.abs(number - rounded) == 0.5) { // Controlla se il valore originale è a +0.5 o -0.5
+            rounded += (number > rounded) ? 0.5f : -0.5f; // Aggiunge +0.5 o -0.5 a seconda del caso
+        }
+        return rounded;
+    }
 }

@@ -8,8 +8,8 @@
     <title>SIWMovie - Il mio Profilo</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/stile.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/stile.css}">
   	<style>
     	.checked {
      	 color: orange;
@@ -31,19 +31,6 @@
 	            <div th:each="review: ${user.review}" id="container-recensione" class="review-container mt-4 rounded shadow" style="text-align: center;">
 	                <h3 th:text="'Titolo: ' + ${review.title} + '&ensp;' + '&nbsp;' + '|' + '&ensp;' + ' Valutazione: '+ ${review.valutation} +'/5' + '&ensp;'"></h3>
 	                <!--<progress max="5" th:value="${review.valutation}" class="progress"></progress>-->
-	                
-					<style>
-    					.stars-container {
-        				display: inline-block;
-    				}
-
-    				.stars-container p {
-        				display: inline-block;
-    				}
-    				
-        			
-					</style>
-
 					<div th:with="valutation=${review.valutation}">
 					    <div class="stars-container">
 					        <p th:each="review: ${#numbers.sequence(0, 5)}">

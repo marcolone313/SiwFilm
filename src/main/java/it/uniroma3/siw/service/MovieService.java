@@ -22,8 +22,6 @@ public class MovieService {
     private MovieRepository movieRepository;
     @Autowired
     private ArtistRepository artistRepository;
-//    @Autowired
-//    private GenreRepository genreRepository;
 
     @Autowired
     private MovieValidator movieValidator;
@@ -53,10 +51,6 @@ public class MovieService {
         return this.movieRepository.findAllByYear(year);
     }
 
-//    @Transactional
-//    public List<Movie> getMoviesByGenre(Genre genre){
-//        return this.movieRepository.findAllByGenresContains(genre);
-//    }
 
     @Transactional
     public boolean existsByTitleAndYear(String title, Integer year){
@@ -104,34 +98,6 @@ public class MovieService {
 
         return movie;
     }
-    
-//    @Transactional
-//    public Movie addGenreTo(Long idMovie, Long idGenre){
-//        Movie movie = this.movieRepository.findById(idMovie).get();
-//		Genre genre = this.genreRepository.findById(idGenre).get();
-//
-//		movie.getGenres().add(genre);
-//		this.movieRepository.save(movie);
-//
-//		genre.getMovies().add(movie);
-//		this.genreRepository.save(genre);
-//
-//        return movie;
-//    }
-//
-//    @Transactional
-//    public Movie removeGenreFrom(Long idMovie, Long idGenre){
-//        Movie movie = this.movieRepository.findById(idMovie).get();
-//		Genre genre = this.genreRepository.findById(idGenre).get();
-//
-//		movie.getGenres().remove(genre);
-//		this.movieRepository.save(movie);
-//
-//		genre.getMovies().remove(movie);
-//		this.genreRepository.save(genre);
-//
-//        return movie;
-//    }
 
     @Transactional
     public void deleteMovieById(Long id){

@@ -19,3 +19,18 @@
 #card-container{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+#stars{
+	display: inline-block;
+	margin-right: -4px;
+}
+
+.stars-container {
+  color: grey; /* Colore delle stelle non colorate */
+}
+
+.fa-star.checked {
+  color: orange; /* Colore delle stelle intere */
+}
+
+

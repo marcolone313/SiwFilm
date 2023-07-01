@@ -41,12 +41,12 @@
 		            <hr>
 		            <div th:if="${movie.director}" class="mb-2">
 		                <a th:href="@{'/admin/addDirector' + '/' + ${movie.id}}" class="btn btn-link">
-		                    <h2 th:text="'Regista: '+${movie.director.name} + ' ' + ${movie.director.surname} + ' ○ Modifica'"></h2>
+		                    <h2 th:text="'Regista: '+${movie.director.name} + ' ' + ${movie.director.surname} + ' | Modifica'"></h2>
 		                </a>
 		            </div>
 		            <div th:unless="${movie.director}" class="mb-2">
 		                <a th:href="@{'/admin/addDirector' + '/' + ${movie.id}}" class="btn btn-link">
-		                    <h2 th:text="'Ancora nessun Regista ○ Aggiungi'"></h2>
+		                    <h2 th:text="'Regista: Modifica'"></h2>
 		                </a>
 		            </div>
 		            <hr>
@@ -63,10 +63,10 @@
 		        <h2>Recensioni</h2>
 		        <div class="col-12">
 		            <div class="mb-3" th:each="review: ${movie.reviews}">
-		                <h2 th:text="'Titolo: ' + ${review.title} + ' di ' + ${review.user.name} + ' ' + ${review.user.surname}+' ○ Valutazione: '+ ${review.valutation} +'/5'"></h2>
-		                <progress max="5" th:value="${review.valutation}" class="form-control"></progress>
+		                <h3 th:text="'Titolo: ' + ${review.title} + ' di ' + ${review.user.name} + ' ' + ${review.user.surname}+' | Valutazione: '+ ${review.valutation} +'/5'"></h3>
+		                <!--<progress max="5" th:value="${review.valutation}" class="form-control"></progress>-->
 		                <a th:href="@{'/admin/manageReview/'+${review.id}}" class="btn btn-link" style="margin-left: 10%;">
-		                    <h2>Leggi Recensione</h2>
+		                    <h3>Leggi Recensione</h3>
 		                </a>
 		            </div>
 		        </div>

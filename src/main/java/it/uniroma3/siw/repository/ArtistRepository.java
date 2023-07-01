@@ -11,7 +11,6 @@ import it.uniroma3.siw.model.Movie;
 public interface ArtistRepository extends CrudRepository<Artist, Long>{
 
     public boolean existsByNameAndSurnameAndBirthDate(String name, String surname, LocalDate birthDate);
-    public List<Artist> getArtistByMoviesNotContains(Movie movie); //?
-    //List<Artist> FindAllByActedMoviesIsNotControlling(Movie movie);
+    public List<Artist> getArtistByMoviesNotContains(Movie movie);
 
 }

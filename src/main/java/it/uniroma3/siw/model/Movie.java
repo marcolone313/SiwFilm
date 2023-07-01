@@ -18,24 +18,20 @@ public class Movie {
 	@NotBlank
 	private String title;
 	
-	@NotNull @Min(1900) @Max(2023) //@PastOrPresent se volessimo indicare solo film passati
+	@NotNull @Min(1900) @Max(2023)
     private Integer year;
 
-	@Column(length = 100000000)//max 10Mb
+	@Column(length = 100000000)
 	private String imageString;
     
     @ManyToMany(mappedBy="movies")
     private List<Artist> artists;
-
-//	@ManyToMany(mappedBy="movies")
-//    private List<Genre> genres;
-    
    
 
 	@ManyToOne
     private Artist director;
 
-	@OneToMany(mappedBy="movie") //introdurre fetch type lazy e gettare dalla repo?
+	@OneToMany(mappedBy="movie")
 	private List<Review> reviews;
     
 	public List<Review> getReviews() {
@@ -103,12 +99,4 @@ public class Movie {
 	public void setDirector(Artist director) {
 		this.director = director;
 	}
-	
-//	public List<Genre> getGenres() {
-//		return genres;
-//	}
-//
-//	public void setGenres(List<Genre> genres) {
-//		this.genres = genres;
-//	}
 }

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.service.ArtistService;
-//import it.uniroma3.siw.service.GenreService;
 import it.uniroma3.siw.service.MovieService;
 import it.uniroma3.siw.service.ReviewService;
 import it.uniroma3.siw.validator.MovieValidator;
@@ -29,15 +29,12 @@ public class MovieController {
 	MovieValidator movieValidator;
 	@Autowired
 	ArtistService artistService;
-	//@Autowired
-	//GenreService genreService;
 	@Autowired
 	ReviewService reviewService;
 
 	@GetMapping("/admin/manageMovies")
 	public String managemovies(Model model) {
 		model.addAttribute("movies", this.movieService.getAllMovies());
-		//model.addAttribute("genres", this.genreService.getAllGenres());
 		return "/admin/manageMovies.html";
 	}
 
@@ -116,48 +113,28 @@ public class MovieController {
 	@GetMapping("/movies")
 	public String showMovies(Model model) {
 		model.addAttribute("movies", this.movieService.getAllMovies());
-		//model.addAttribute("genres", this.genreService.getAllGenres());
 		return "movies.html";
 	}
 
 	@GetMapping("/searchMoviesByYear")
 	public String searchMoviesByYear(Model model, @RequestParam Integer year) {
 		model.addAttribute("movies", this.movieService.getMoviesByYear(year));
-		//model.addAttribute("genres", this.genreService.getAllGenres());
 		return "movies.html";
 	}
-
-//	@GetMapping("/manageMoviesByGenre")
-//	public String manageMoviesByGenre(Model model, @RequestParam Long genreId) {
-//		model.addAttribute("movies", this.movieService.getMoviesByGenre(this.genreService.getGenreById(genreId)));
-//		model.addAttribute("genres", this.genreService.getAllGenres());
-//		return "admin/manageMovies.html";
-//	}
 
 	@GetMapping("/manageMoviesByYear")
 	public String manageMoviesByYear(Model model, @RequestParam Integer year) {
 		model.addAttribute("movies", this.movieService.getMoviesByYear(year));
-		//model.addAttribute("genres", this.genreService.getAllGenres());
 		return "admin/manageMovies.html";
 	}
 
-//	@GetMapping("/searchMoviesByGenre")
-//	public String searchMoviesByGenre(Model model, @RequestParam Long genreId) {
-//		model.addAttribute("movies", this.movieService.getMoviesByGenre(this.genreService.getGenreById(genreId)));
-//		model.addAttribute("genres", this.genreService.getAllGenres());
-//		return "movies.html";
-//	}
-
-//	@GetMapping("/getMoviesByGenre/{id}")
-//	public String getMoviesByGenre(Model model, @PathVariable("id") Long id) {
-//		model.addAttribute("movies", this.movieService.getMoviesByGenre(this.genreService.getGenreById(id)));
-//		model.addAttribute("genres", this.genreService.getAllGenres());
-//		return "movies.html";
-//	}
-
 	@GetMapping("/admin/deleteMovie/{id}")
 	public String deleteMovie(Model model, @PathVariable("id") Long id) {
-		model.addAttribute("movies", this.movieService.deleteMovieByIdAndReturnAll(id));
+		Movie movieToBeDeleted = this.movieService.getMovieById(id);
+		for(Review review : movieToBeDeleted.getReviews()) {
+			this.reviewService.deleteReviewById(review.getId());
+		}
+		model.addAttribute("movie", this.movieService.deleteMovieByIdAndReturnAll(id));
 		return "admin/manageMovies.html";
 	}
 
@@ -180,30 +157,5 @@ public class MovieController {
 			return "admin/formEditMovie.html";
 		}
 	}
-
-//	@GetMapping("/admin/manageGenres/{id}")
-//	public String manageGenres(@PathVariable("id") Long id, Model model) {
-//		model.addAttribute("movie", this.movieService.getMovieById(id));
-//		model.addAttribute("genres", this.genreService.getGenresNotInMovieById(id));
-//		return "/admin/manageGenres.html";
-//	}
-
-//	@GetMapping("/admin/addGenre/{idGenre}/{idMovie}")
-//	public String addGenre(@PathVariable("idGenre") Long idGenre, @PathVariable("idMovie") Long idMovie,
-//			Model model) {
-//
-//		model.addAttribute("movie", this.movieService.addGenreTo(idMovie, idGenre));
-//		model.addAttribute("genres", this.genreService.getGenresNotInMovieById(idMovie));
-//		return "/admin/manageGenres.html";
-//	}
-//
-//	@GetMapping("/admin/removeGenre/{idGenre}/{idMovie}")
-//	public String removeGenre(@PathVariable("idGenre") Long idGenre, @PathVariable("idMovie") Long idMovie,
-//			Model model) {
-//
-//		model.addAttribute("movie", this.movieService.removeGenreFrom(idMovie, idGenre));
-//		model.addAttribute("genres", this.genreService.getGenresNotInMovieById(idMovie));
-//		return "/admin/manageGenres.html";
-//	}
 
 }
