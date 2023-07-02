@@ -58,7 +58,7 @@ public class ReviewService {
 
     @Transactional
     public Float getMovieRatingById(Long id){
-        return (Math.round(this.reviewRepository.findValutationAvgByMovie(this.movieRepository.findById(id).get()) * Math.pow(10, 1)) / (float) Math.pow(10, 1));
+        return this.reviewRepository.findValutationAvgByMovie(this.movieRepository.findById(id).get());
         
     }
 
@@ -67,6 +67,12 @@ public class ReviewService {
         Review review = this.reviewRepository.findById(id).get();
 		review.getMovie().getReviews().remove(review);
 
+		this.reviewRepository.delete(review);
+    }
+    
+    @Transactional
+    public void deleteReviewWhenDeletingMovie(Long id){
+        Review review = this.reviewRepository.findById(id).get();
 		this.reviewRepository.delete(review);
     }
 

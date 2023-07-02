@@ -15,31 +15,34 @@
     <nav th:insert="~{navbar.html :: navbar-admin}"> </nav>
 
     <main class="evenly-spaced margin-top">
-	    <div class="box">
-	        <h2 class="title" th:text="${artist.name} + ' ' + ${artist.surname}">Nome</h2>
-	        <div class="box-content">
-	            <div class="row">
-	                <div class="col-md-4">
-	                    <div class="film-img">
-	                        <img class="img-fluid" th:src="@{'data:image;base64,' + ${artist.imageString}}">
-	                    </div>
-	                </div>
-	                <div id="manage-options" class="col-md-8 d-flex align-items-center justify-content-evenly">
-	                    <a class="btn btn-primary" th:href="@{'/admin/editArtist/' + ${artist.id}}">
-	                        <img class="icon" th:src="@{/pngs/edit.png}">
-	                    </a>
-	                    <a class="btn btn-danger" th:href="@{'/admin/deleteArtist/' + ${artist.id}}">
-	                        <img class="icon" th:src="@{/svgs/bin.svg}">
-	                    </a>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="d-flex justify-content-around">
-	            <h3 class="text-center" th:text="'Data di nascita: ' + ${artist.birthDate}">età</h3>
-	            <h3 class="text-center" th:if="${artist.deathDate}" th:text="'Data di morte: ' + ${artist.deathDate}">età</h3>
-	        </div>
-	    </div>
-	</main>
+    <div class="box">
+        <h2 class="title d-flex justify-content-center" th:text="${artist.name} + ' ' + ${artist.surname}">Nome</h2>
+        <div class="box-content d-flex justify-content-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="film-img">
+                        <img class="img-fluid" style="max-width: 200px; max-height: 300px;" th:src="@{'data:image;base64,' + ${artist.imageString}}">
+                    </div>
+                </div>
+                <div id="manage-options" class="col-md-8 d-flex align-items-center justify-content-end">
+                    <a class="btn btn-primary" th:href="@{'/admin/editArtist/' + ${artist.id}}">
+                        <img class="icon" th:src="@{/pngs/edit.png}" style="max-width: 20px; max-height: 20px;">
+                    </a>
+                    <a class="btn btn-danger" th:href="@{'/admin/deleteArtist/' + ${artist.id}}">
+                        <img class="icon" th:src="@{/svgs/bin.svg}" style="max-width: 20px; max-height: 20	px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-around">
+            <h3 class="text-center" th:text="'Data di nascita: ' + ${artist.birthDate}">età</h3>
+            <h3 class="text-center" th:if="${artist.deathDate}" th:text="'Data di morte: ' + ${artist.deathDate}">età</h3>
+        </div>
+    </div>
+</main>
+
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

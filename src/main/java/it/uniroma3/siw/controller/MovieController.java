@@ -131,10 +131,7 @@ public class MovieController {
 	@GetMapping("/admin/deleteMovie/{id}")
 	public String deleteMovie(Model model, @PathVariable("id") Long id) {
 		Movie movieToBeDeleted = this.movieService.getMovieById(id);
-		for(Review review : movieToBeDeleted.getReviews()) {
-			this.reviewService.deleteReviewById(review.getId());
-		}
-		model.addAttribute("movie", this.movieService.deleteMovieByIdAndReturnAll(id));
+		model.addAttribute("movies", this.movieService.deleteMovieByIdAndReturnAll(id));
 		return "admin/manageMovies.html";
 	}
 

@@ -15,25 +15,26 @@
     <nav th:insert="~{navbar.html :: navbar-admin}"> </nav>
 
     <main>
-	    <div class="card-slideshow small-margin-top">
-	        <div class="title-div">
-	            <h1 th:if="${artists.isEmpty()}" class="title">Non ci sono Artisti nel sistema</h1>
-	            <h1 th:unless="${artists.isEmpty()}" class="title">Gestisci Artisti</h1>
-	        </div>
-	        <div class="card-container">
-	            <div class="card" th:each="artist : ${artists}">
-	                <div class="card-img">
-	                    <img class="img-fluid" th:src="@{'data:image;base64,' + ${artist.imageString}}">
-	                </div>
-	                <div class="card-info">
-	                    <a class="link" th:href="@{'/admin/manageArtist/' + ${artist.id}}">
-	                        <h3 class="card-title" th:text="${artist.name} + ' ' + ${artist.surname}">Info</h3>
-	                    </a>
-	                </div>
-	            </div>
-	        </div>
+    <div class="card-slideshow small-margin-top">
+        <div class="title-div">
+            <h1 th:if="${artists.isEmpty()}" class="title">Non ci sono Artisti nel sistema</h1>
+            <h1 th:unless="${artists.isEmpty()}" class="title">Gestisci Artisti</h1>
+        </div>
+        <div class="row">
+	  <div th:each="artist : ${artists}" class="col-md-4 my-2">
+	    <div class="card h-100 d-flex align-items-center">
+	      <img class="card-img-top" style="max-width: 200px; max-height: 300px; padding-top: 20px;" th:src="@{'data:image;base64,' + ${artist.imageString}}" alt="Image of the artist">
+	      <div class="card-body d-flex align-items-end">
+	        <a th:href="@{'/admin/manageArtist' + '/' + ${artist.id} }">
+	          <h5 class="card-title text-center" th:text="${artist.name} + ' ' + ${artist.surname}"></h5>
+	        </a>
+	      </div>
 	    </div>
-	</main>
+	  </div>
+	</div>
+    </div>
+</main>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

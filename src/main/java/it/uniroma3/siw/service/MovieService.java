@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.model.Movie;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.repository.ArtistRepository;
 import it.uniroma3.siw.repository.MovieRepository;
 import it.uniroma3.siw.validator.MovieValidator;
@@ -25,6 +26,9 @@ public class MovieService {
 
     @Autowired
     private MovieValidator movieValidator;
+    
+    @Autowired
+    private ReviewService reviewService;
 
     @Transactional
     public void persistMovie(Movie movie){
@@ -117,10 +121,15 @@ public class MovieService {
 		for (Artist artist : movie.getArtists()) {
 			artist.getMovies().remove(movie);
 		}
-
-//        for (Genre genre : movie.getGenres()) {
-//			genre.getMovies().remove(movie);
-//		}
+		
+		if(movie.getReviews()!=null) {
+			for(Review r : movie.getReviews()) {
+				this.reviewService.deleteReviewWhenDeletingMovie(r.getId());
+			}
+			
+			movie.getReviews().clear();
+		}
+		
 
 		this.movieRepository.delete(movie);
 
