@@ -1,0 +1,28 @@
+Caso d'uso UC1:  Cercare un film – Attore primario: un Utente generico. 
+1. Un Utente generico seleziona l'attività "Tutti i film". Il Sistema restituisce un elenco di tutti i film.
+2. L'Utente seleziona un film a sua scelta dall'elenco. Il Sistema restituisce le informazioni relative al film selezionato.
+Estensione 2a: L'Utente cerca tra tutti i film per un determinato anno di uscita. Il Sistema restituisce l'elenco dei film usciti in quell'anno, altrimenti il Sistema informa l'Utente che non ci sono film per quell'anno. 
+
+Caso d'uso UC2: Visualizzare un film - Attore primario: un Utente registrato
+1. Un Utente seleziona l'attività "Tutti i film". Il Sistema restituisce un elenco di tutti i film.
+2. L'Utente seleziona un film a sua scelta dall'elenco. Il Sistema restituisce le informazioni relative al film selezionato.
+Estensione 2a: L'Utente cerca tra tutti i film per un determinato anno di uscita. Il Sistema restituisce l'elenco dei film usciti in quell'anno, altrimenti il Sistema informa l'Utente che non ci sono film per quell'anno.
+
+Caso d'uso UC3: Inserire un nuovo film - Attore primario: un Amministratore
+1. Un Amministratore sceglie l'attività "Inserisci film". Il Sistema restituise il form per l'inserimento dati di un nuovo film.
+2. L'Amministratore inserisce i dati relativi al film da inserire. Il Sistema popola una nuova entità e la inserisce nell'elenco.
+Estensione 2a: Il film da inserire già esisteva nell'elenco. Il Sistema non inserisce il film e dà errore.
+
+Caso d'uso UC4: Inserire una nuova recensione - Attore primario: un Utente registrato
+1. Un Utente, dopo aver selezionato un film, sceglie l'attività "Aggiungi una recensione". Il Sistema restituisce il form per l'inserimento di una nuova recensione.
+2. L'Utente inserisce titolo, voto e testo della recensione. Il Sistema registra la nuova recensione.
+Estensione 1a: L'Utente ha già inserito una recensione per lo specifico film. Il Sistema non inserisce la recensione e dà errore.
+
+Caso d'uso UC5: Cancellare un film - Attore primario: un Amministratore
+1. Un Amministratore seleziona l'attività "Gestione film". Il Sistema restituisce l'elenco dei film.
+2. L'Amministratore seleziona il film che vuole cancellare. Il Sistema restituisce la pagina di modifica del film.
+3. L'Amministratore seleziona l'attività per cancellare il film. Il Sistema cancella il film selezionato con tutte le recensioni relative a quest'ultimo e restituisce la pagina dei film aggiornata.
+
+Caso d'uso UC6: Visualizza un Attore - Attore primario: un Utente generico
+1. Un Utente generico seleziona l'attività "Tutti gli artisti". Il Sistema restituisce un elenco di tutti gli artisti.
+2. L'Utente seleziona un artista a sua scelta dall'elenco. Il Sistema restituisce le informazioni relative all'artista selezionato.

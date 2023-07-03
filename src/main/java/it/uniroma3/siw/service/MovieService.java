@@ -2,7 +2,8 @@ package it.uniroma3.siw.service;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.List;
+import java.util.Collections;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,45 @@ public class MovieService {
 
     @Transactional
     public Iterable<Movie> getAllMovies(){
-        return  this.movieRepository.findAll();
+        return this.movieRepository.findAll();
     }
+    
+    /*@Transactional
+    public Iterable<Movie> getAllMovies(){
+        //return this.movieRepository.findAll();
+    	Iterable<Movie> iterabileCorrente = this.movieRepository.findAll();
+    	List<Movie> listaCorrente = new LinkedList<>();
+    	for(Movie m : iterabileCorrente) {
+    		listaCorrente.add(m);
+    	}
+    	
+    	Collections.sort(listaCorrente, new Comparator<Movie>() {
+    		@Override
+    		public int compare(Movie m1, Movie m2) {
+    			int ActorCount1=m1.getArtists().size();
+    			int ActorCount2 = m2.getArtists().size();
+    			return Integer.compare(ActorCount1, ActorCount2);
+    		}
+    	});
+    	
+    	Iterable<Movie> sortedList = listaCorrente;
+    	
+    	return sortedList;
+    }*/
+    /*@Transactional
+    public List<Movie> getMoviesByYear (Integer year){
+    	return this.movieRepository.findAllByYearGreaterThan(year-1);
+    }
+    
+    @Transactional
+    public List<Movie> getMoviesByYear (Integer year){
+    	return this.movieRepository.findAllByYearLessThan(year);
+    }
+    @Transactional
+    public Iterable<Movie> getAllMovies(){
+        return this.movieRepository.findAllByOrderByTitleDesc();
+    }*/
+    
 
     @Transactional
     public Movie getMovieById(Long id){
@@ -54,7 +92,6 @@ public class MovieService {
     public List<Movie> getMoviesByYear(Integer year){
         return this.movieRepository.findAllByYear(year);
     }
-
 
     @Transactional
     public boolean existsByTitleAndYear(String title, Integer year){
